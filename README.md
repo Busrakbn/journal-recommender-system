@@ -60,14 +60,13 @@ NLTK data (stopwords, wordnet) will be downloaded automatically the first time y
 
 ## Using the Recommendation System
 
-Run **Cell 5** — it will display an input prompt directly in the notebook:
+At the top of the last code cell, set the `MY_ABSTRACT` variable to your article's abstract, then run the cell:
 
-```
-=== Computer Science Journal Finder ===
-Enter your article abstract: |
+```python
+MY_ABSTRACT = "Your article abstract goes here..."
 ```
 
-Type or paste your abstract and press Enter. The output will print the top 5 recommended journals:
+The output will print the top 5 recommended journals:
 
 ```
 --- Top 5 Recommended Journals ---
@@ -76,7 +75,9 @@ Type or paste your abstract and press Enter. The output will print the top 5 rec
 ...
 ```
 
-If you press Enter without typing anything, the system runs a built-in sample abstract automatically.
+If `MY_ABSTRACT` is left as `""`, the system runs a built-in sample abstract automatically.
+
+> **Note:** `input()` is not used because it blocks indefinitely in VS Code's notebook kernel. Setting `MY_ABSTRACT` directly is the reliable cross-platform approach.
 
 ---
 
