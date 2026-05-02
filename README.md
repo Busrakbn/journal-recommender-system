@@ -51,23 +51,23 @@ NLTK data (stopwords, wordnet) will be downloaded automatically the first time y
 | Cell | Description |
 |------|-------------|
 | **Cell 1** | Loads the dataset — auto-detects Google Drive vs. local path, assigns column names |
-| **Cell 2** | Colab verification step — re-loads from Drive path and previews data |
+| **Cell 2** | Data verification — prints dataset shape, column list, and unique journal count |
 | **Cell 3** | NLP preprocessing — removes HTML, stopwords, and lemmatizes text; merges abstract + keywords + subjects into one feature |
-| **Cell 4** | TF-IDF vectorization + K-Means clustering (k=10) + PCA scatter plot visualization |
-| **Cell 5** | Builds journal profile vectors and runs cosine similarity recommendation for a test abstract |
+| **Cell 4** | Elbow curve (k=2–15) + K-Means (k=10) + PCA scatter plot + top keywords per cluster |
+| **Cell 5** | Builds journal profile vectors; prompts for user abstract input; returns top 5 journals |
 
 ---
 
 ## Using the Recommendation System
 
-At the bottom of **Cell 5**, replace the `test_abstract` string with your own article abstract and re-run:
+Run **Cell 5** — it will display an input prompt directly in the notebook:
 
-```python
-test_abstract = "Your article abstract goes here..."
-results = find_top_5_journals(test_abstract)
+```
+=== Computer Science Journal Finder ===
+Enter your article abstract: |
 ```
 
-The output will print the top 5 most relevant journals with their similarity scores:
+Type or paste your abstract and press Enter. The output will print the top 5 recommended journals:
 
 ```
 --- Top 5 Recommended Journals ---
@@ -76,11 +76,13 @@ The output will print the top 5 most relevant journals with their similarity sco
 ...
 ```
 
+If you press Enter without typing anything, the system runs a built-in sample abstract automatically.
+
 ---
 
 ## Notes
 
-- **Cell 2 is optional locally.** If Cell 1 ran without errors, you can skip Cell 2 — it is a leftover development step from Google Colab.
-- **Run cells in order.** Later cells depend on variables created by earlier cells (e.g., `df`, `X`, `tfidf`, `clean_text`). Running them out of order will cause `NameError`.
-- **Re-running is safe.** All cells are idempotent — re-running them simply overwrites the variables with the same values.
+- **Run cells in order.** Later cells depend on variables created by earlier cells (`df`, `X`, `tfidf`, `clean_text`). Running out of order will cause a `NameError`.
+- **Cell 4 takes ~1 minute.** The elbow method runs K-Means 14 times to evaluate different values of k. This is intentional and only runs once.
+- **Re-running is safe.** All cells are idempotent — re-running simply overwrites variables with the same values.
 - **NLTK download:** The first run of Cell 3 downloads ~3 MB of NLTK data. Subsequent runs skip the download automatically.
